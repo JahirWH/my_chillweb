@@ -1,20 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import './App.css';
-
-// Importa tu imagen de preview y algún icono para los controles
+import Info from './Info.jsx';
 import preview from './assets/preview.jpg';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from 'react-icons/fa';
+
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
-  // const [progress, setProgress] = useState(0);
-  // const [currentTime, setCurrentTime] = useState('0:00');
-  // const [duration, setDuration] = useState('0:00');
-  
+  const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState('0:00');
+  const [duration, setDuration] = useState('0:00');
+
   const audioRef = useRef(null);
-  
-  // Ejemplo de canción (reemplaza con tu archivo de audio)
   const audioSrc = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
 
   const togglePlay = () => {
@@ -44,10 +42,14 @@ function App() {
     const current = audioRef.current.currentTime;
     const dur = audioRef.current.duration;
     setProgress((current / dur) * 100);
-    
-    // Formatear tiempo
     setCurrentTime(formatTime(current));
     if (dur) setDuration(formatTime(dur));
+  };
+
+  const handleProgressClick = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    audioRef.current.currentTime = pos * audioRef.current.duration;
   };
 
   const formatTime = (seconds) => {
@@ -56,55 +58,43 @@ function App() {
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
- 
-
   useEffect(() => {
-    // Precargar metadatos para obtener la duración
     audioRef.current.addEventListener('loadedmetadata', () => {
       setDuration(formatTime(audioRef.current.duration));
     });
   }, []);
 
- 
   return (
     <section className='section-chill-app'>
-    <div className="chill-app">
-    <div className='img-preview'>
+      <div className="chill-app">
+        <div className='img-preview'>
           <img src={preview} className='preview' alt='miniatura' />
-
-
           {isPlaying && <div className='audio-wave'></div>}
         </div>
-      <section className='media-player'>
-        
-        
-        <div className='reproductor'>
-          <audio
-            ref={audioRef}
-            src={audioSrc}
-            onTimeUpdate={handleTimeUpdate}
-            onEnded={() => setIsPlaying(false)}
-          />
-          
-          <div className='controls'>
-          <button className='prev-btn' onClick={() => { /* lógica para canción anterior */ }}>
-          <FaStepBackward />
-        </button>
-            <button className='play-btn' onClick={togglePlay}>
-              {isPlaying ? <FaPause /> : <FaPlay />}
-            </button> 
-            <button className='next-btn' onClick={() => { /* lógica para canción siguiente */ }}>
-            <FaStepForward />
-          </button>
-  
-           
+        <section className='media-player'>
+          <div className='reproductor'>
+            <audio
+              ref={audioRef}
+              src={audioSrc}
+              onTimeUpdate={handleTimeUpdate}
+              onEnded={() => setIsPlaying(false)}
+            />
+            <div className='controls'>
+              <button className='prev-btn' onClick={() => { /* lógica para canción anterior */ }}>
+                <FaStepBackward />
+              </button>
+              <button className='play-btn' onClick={togglePlay}>
+                {isPlaying ? <FaPause /> : <FaPlay />}
+              </button>
+              <button className='next-btn' onClick={() => { /* lógica para canción siguiente */ }}>
+                <FaStepForward />
+              </button>
+            </div>
           </div>
-        </div>
-        
-      </section>
-
-          <div className='volume-control' onmouseenter="showSlider()" onmouseleave="hideSlider()">
-          <button  id="volume-icon"  onClick={toggleMute}>
+        </section>
+    
+        <div className='volume-control'>
+          <button id="volume-icon" onClick={toggleMute}>
             {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
           </button>
           <input
@@ -116,23 +106,10 @@ function App() {
             value={isMuted ? 0 : volume}
             onChange={handleVolumeChange}
           />
-          
         </div>
-
-    </div>
-   </section>
-
-  
-    
-    
-      
-
+      </div>
+    </section>
   );
 }
-
-
- 
-
-
 
 export default App;

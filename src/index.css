@@ -1,5 +1,4 @@
 .background {
-  background-image: url('./assets/bg.jpg');
   width: 100%;
   object-fit: contain;
   background-size: cover;
@@ -15,9 +14,11 @@
   display: flex;
   margin: 0;
   position: fixed;
+  top: 0;
   width: 100%;
   height: fit-content;
 }
+
 #Info{
   display: flex;
   position: fixed;

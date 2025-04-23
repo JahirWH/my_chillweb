@@ -1,21 +1,14 @@
 import './Info.css';
 
-function Info() {
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState('0:00');
-  const [duration, setDuration] = useState('0:00');
-  
-  const handleProgressClick = (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const pos = (e.clientX - rect.left) / rect.width;
-    audioRef.current.currentTime = pos * audioRef.current.duration;
-  };
-
+function Info({ progress, buffered, currentTime, duration, onProgressClick }) {
   return (
-
-    <div className='progress-container' onClick={handleProgressClick}>
-       <div className='progress-bar' style={{ width: `${progress}%` }}></div>
-  </div>
+    <div className='progress-container' onClick={onProgressClick}>
+      <div className='buffered-bar' style={{ width: `${buffered}%` }}></div>
+      <div className='progress-bar' style={{ width: `${progress}%` }}></div>
+      <div className='time-display'>
+        <span>{currentTime}</span> / <span>{duration}</span>
+      </div>
+    </div>
   );
 }
 
