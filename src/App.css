@@ -1,6 +1,184 @@
-.media{
-  width: 100px;
-  height: auto;
-  background-color: red;
-  height: 30px;
+.section-chill-app {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  height: 150px;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0.7;
+  /* background: linear-gradient(135deg, #373738, #2e2e2e48); */
 }
+.section-chill-app:hover {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.chill-app {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+.media-player {
+  display: block;
+  margin: auto 0;
+  flex-direction: column;
+  gap: 20px;
+  /* background: rgba(255, 255, 255, 0.1); */
+  backdrop-filter: blur(1px);
+  border-radius: 20px;
+  padding: 20px;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
+  width: 40%;
+}
+
+
+.img-preview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 20%;
+  height: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.preview {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.img-preview:hover .preview {
+  transform: scale(1.02);
+}
+
+.audio-wave {
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: wave 1.5s linear infinite;
+}
+
+@keyframes wave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.reproductor {
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.play-btn {
+  background: #302f30a2;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  opacity: 0.8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: auto;
+}
+
+.play-btn:hover {
+  opacity: 1;
+  color: black;
+  background: #edf0ed8f;
+}
+.next-btn,
+.prev-btn {
+  background: #302f30a2;
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  opacity: 0.8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.next-btn:hover,
+.prev-btn:hover {
+  opacity: 1;
+  color: black;
+  background: #edf0ed8f;
+}
+.play-btn:focus,
+.next-btn:focus,
+.prev-btn:focus {
+  outline: none;
+}
+.play-btn:active,
+.next-btn:active,
+.prev-btn:active {
+  transform: scale(0.95);
+}
+
+
+
+
+.time-display {
+  font-size: 14px;
+  color: #666;
+  min-width: 80px;
+  text-align: center;
+}
+.volume-control {
+  position: absolute;
+  display: block;
+  gap: 10px;
+  width: fit-content;
+  padding: 6px;
+  top: 0;
+  right: 0;
+  align-content: center;
+}
+
+.volume-control button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6effd1;
+  cursor: pointer;
+}
+
+#volume-slider {
+  width: 0;
+  opacity: 0;
+  height: 5px;
+  border-radius: 5px;
+  transition: width 0.4s ease, opacity 0.3s ease;
+  background-color: #222;
+  accent-color: #6effd1;
+  cursor: pointer;
+}
+
+.volume-control:hover #volume-slider {
+  width: 80px;
+  opacity: 1;
+}
+
+
