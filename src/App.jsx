@@ -2,9 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import './App.css';
 const preview2 = 'https://media.giphy.com/media/UByFQJYlKxprETlJ84/giphy.gif?cid=ecf05e475x7ql9pxrfxz957k9wsz6g3z4t15velkoaijh7vj&ep=v1_gifs_related&rid=giphy.gif&ct=g';
 const preview1 = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzc1czJ3ZTV0YnlhMjRpYzI2NmxtYXNwdHBiMnA1b3p4MGxqN3VkMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/C3gZCY92Cwyxq/giphy.gif'
-import song1 from './mp3/song1.mp3';
-import song2 from './mp3/song2.mp3';
-import song3 from './mp3/song3.mp3'; // Agrega más canciones si es necesario
+const song1 = 'https://res.cloudinary.com/dr9van0op/video/upload/v1745559331/Galaxy_s_Most_Wanted_0sfwvi46i7I_rw0pjm.mp3';
+const song2 = 'https://res.cloudinary.com/dr9van0op/video/upload/v1745559326/Your_Signal_in_the_Stars_bQvfCzNpQ00_fqdnbr.mp3';
+const song3 = 'https://res.cloudinary.com/dr9van0op/video/upload/v1745559326/Your_Signal_in_the_Stars_bQvfCzNpQ00_fqdnbr.mp3';
+
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from 'react-icons/fa';
 
 function App() {
@@ -118,6 +119,7 @@ function App() {
         <div className='img-preview' onClick={cambio_preview}>
           <img  src={currentPreview} className='preview' alt='miniatura' />
           <p className='time'> {horaActual}</p>
+          <p className='estado'> {isPlaying ? 'playing' : 'stoped' }</p>
           {isPlaying && <div className='audio-wave'></div>}
         </div>
         <section className='media-player'>
