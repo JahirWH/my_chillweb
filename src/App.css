@@ -42,7 +42,7 @@
   overflow: hidden;
   width: 20%;
   height: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); */
   display: flex;
 }
 
@@ -194,8 +194,8 @@
 }
 
 .time{
-  font-family: 'Courier New', monospace;
-    font-size: 1.8rem;
+  font-size: 1.8rem;
+  padding: 8px;
     position: absolute;
     font-weight: bold;
     color: #dcdfdd;
@@ -205,4 +205,17 @@
     left: 50%;
     margin: 0;
     transform: translate(-50%, -50%);
+    
+}
+.estado{
+  font-size: 1.1rem;
+    position: absolute;
+    font-weight: bold;
+    color: #eeeeee;
+    text-shadow: 4px 4px 5px #111;
+        z-index: 1;
+    top: 80%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -80%);
 }

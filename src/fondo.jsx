@@ -22,22 +22,25 @@ function FondoCambiante() {
     document.body.style.backgroundSize = 'cover';
     document.body.style.backgroundPosition = 'center';
     document.body.style.backgroundAttachment = 'fixed';
- 
 
   };
    
     return (
       <>
-    
-      <button className="fondo-btn" >
-      <div className="lector">
+      <button className="fondo-btn">
+        <div className="lector">
         <input type="text" className="input" placeholder="Link youtube video..." />
         <button className="btn">Buscar</button>
-      </div>
-        <img className="next" onClick={cambiarFondo} src={fondo1} alt="Cambiar fondo" />
+        </div>
+        <img
+        className="next"
+        onClick={cambiarFondo}
+        src={fondos[(currentFondoIndex + 1) % fondos.length]} // Muestra la siguiente imagen de fondo
+        alt="Cambiar fondo"
+        />
       </button>
-     </>
-  );
+      </>
+    );
 }
 
 export default FondoCambiante;
