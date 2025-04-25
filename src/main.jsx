@@ -16,8 +16,8 @@ createRoot(document.getElementById('root')).render(
    <App />
   </StrictMode>
 );
-createRoot(document.getElementById('Info')).render(
-  <StrictMode>
-   <Info />
-  </StrictMode>
-);
+// createRoot(document.getElementById('Info')).render(
+//   <StrictMode>
+//    <Info />
+//   </StrictMode>
+// );
