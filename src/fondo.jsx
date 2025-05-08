@@ -32,6 +32,16 @@ function FondoCambiante() {
         <input type="text" className="input" placeholder="Link youtube video..." />
         <button className="btn">Buscar</button>
         </div>
+
+        <div className='modos'>
+          <ul>
+            <li>rock</li>
+            <li>Chill</li>
+            <li>Chill</li>
+            <li>Chill</li>
+          </ul>
+
+        </div>
         <img
         className="next"
         onClick={cambiarFondo}

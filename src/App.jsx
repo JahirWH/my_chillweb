@@ -166,7 +166,7 @@ function App() {
           <div className="chill-app">
 
           <div className='img-preview' onClick={cambio_preview}>
-          <img src={currentPreview} className='preview' alt='miniatura' />
+          {/* <img src={currentPreview} className='preview' alt='miniatura' /> */}
           <p className='time'>{horaActual}</p>
           <p className='estado'>
             {isLoading ? (
