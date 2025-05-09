@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './fondo.css';
+import spaceimg from './assets/space.png';
 const fondo1 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745538021/bg1_jzlxlw.webp';
 const fondo2 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745538552/bg2_cuslvq.webp';
 const fondo3 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745537533/bg8_y0idnl.webp';
@@ -28,20 +29,28 @@ function FondoCambiante() {
     return (
       <>
       <button className="fondo-btn">
+{/* 
         <div className="lector">
         <input type="text" className="input" placeholder="Link youtube video..." />
         <button className="btn">Buscar</button>
-        </div>
+        </div> */}
 
         <div className='modos'>
           <ul>
-            <li>rock</li>
-            <li>Chill</li>
+            <li>
+              <img className='modos_img' src={spaceimg}></img>
+              <p className='modos_img_text'>Space</p>
+              </li>
+            <li>
+              <img></img>
+              <p> </p>
+            </li>
             <li>Chill</li>
             <li>Chill</li>
           </ul>
 
         </div>
+        
         <img
         className="next"
         onClick={cambiarFondo}
