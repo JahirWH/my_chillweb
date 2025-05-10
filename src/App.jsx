@@ -15,8 +15,8 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState('0:00');
+  // const [progress, setProgress] = useState(0);
+  // const [currentTime, setCurrentTime] = useState('0:00');
   const [duration, setDuration] = useState('0:00');
   const [currentSongIndex, setCurrentSongIndex] = useState(0); // Índice de la canción actual
   const [isLoading, setIsLoading] = useState(false);
@@ -56,8 +56,6 @@ function App() {
     const current = audioRef.current.currentTime;
     const dur = audioRef.current.duration;
     setProgress((current / dur) * 100);
-    setCurrentTime(formatTime(current));
-    if (dur) setDuration(formatTime(dur));
   };
 
   // const handleProgressClick = (e) => {
@@ -159,7 +157,6 @@ function App() {
  
 
   
-    // Tu lógica y estados existentes...
   
     return (
         <section className='section-chill-app'>
@@ -192,6 +189,7 @@ function App() {
                   </button>
                   <button className='play-btn' onClick={togglePlay}>
                     {isPlaying ? <FaPause /> : <FaPlay />}
+                    
                   </button>
                   <button className='next-btn' onClick={playNext}>
                     <FaStepForward />
@@ -199,6 +197,7 @@ function App() {
                 </div>
               </div>
             </section>
+            
             <div className='volume-control'>
               <button id="volume-icon" onClick={toggleMute}>
                 {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
@@ -217,5 +216,7 @@ function App() {
         </section>
     );
   }
+
+  
   
   export default App;

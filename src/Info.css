@@ -1,64 +1,23 @@
-/* Estilo base para la barra */
 .progress-container {
   position: absolute;
-  bottom: 5px;
-  left: 10%;
-  width: 40%;
-  height: 8px;
-  background: rgba(206, 195, 195, 0.3);
-  border-radius: 4px;
-  cursor: pointer;
-  overflow: hidden;
+  bottom: 15px;
+  left: 6%;
+  width: 50%;
+  height: 5px;
+  background: black;
 }
 
-/* Carga de la canción (buffered) */
-.buffered-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  z-index: 1;
+.container_img {
+  top: -40px;
+  position: relative;
+  height: 40px;
+  width: 100%; /* Asegúrate de que tenga un ancho definido */
+  overflow: hidden; /* Oculta cualquier contenido que se salga */
 }
 
-/* Progreso actual */
-.progress-bar {
+.img_mov {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: linear-gradient(to right, #ff6a00, #ffcc70);
-  border-radius: 3px;
-  z-index: 2;
-}
-
-/* 🔵 Indicador o ícono (mini imagen) */
-.progress-bar::after {
-  content: '🎧';
-  position: absolute;
-  top: 50%;
-  right: -8px;
-  transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
-  /* background-image: url('/assets/bg.jpg'); o usa emoji 🎧 */
-  background-size: cover;
-  border-radius: 50%;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
-  z-index: 3;
-  transition: transform 0.2s ease;
-}
-
-
-/* Tiempo actual / total */
-.time-display {
-  font-size: 12px;
-  color: white;
-  text-align: center;
-  margin-top: 10px;
-  position: absolute;
-  top: -20px;
-  right: 0;
-  left: 0;
+  width: 40px;
+  height: 30px;
+  transition: transform 0.1s linear; /* Suaviza el movimiento */
 }

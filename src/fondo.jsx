@@ -1,65 +1,69 @@
-import React, { useState, useEffect, useRef } from 'react';
+// filepath: /home/ahir/Documentos/GitHub/my_chillweb/src/fondo.jsx
+import React, { useState } from 'react';
 import './fondo.css';
 import spaceimg from './assets/space.png';
+import selvaimg from './assets/selva.jpeg';
+import cityimg from './assets/city.jpeg';
+import anime from './assets/anime.jpeg';
+
+
 const fondo1 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745538021/bg1_jzlxlw.webp';
 const fondo2 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745538552/bg2_cuslvq.webp';
 const fondo3 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745537533/bg8_y0idnl.webp';
 
-
 document.body.style.backgroundImage = `url(${fondo1})`;
 
 function FondoCambiante() {
-  const fondos = [fondo1, fondo2, fondo3]; // Arreglo de imágenes
+  const fondos = [fondo1, fondo2, fondo3];
   const [currentFondoIndex, setCurrentFondoIndex] = useState(0);
 
-
   const cambiarFondo = () => {
-    const nextIndex = (currentFondoIndex + 1) % fondos.length; // Cambia al siguiente fondo
+    const nextIndex = (currentFondoIndex + 1) % fondos.length;
     setCurrentFondoIndex(nextIndex);
-
-    // Cambia el fondo del body
 
     document.body.style.backgroundImage = `url(${fondos[nextIndex]})`;
     document.body.style.backgroundSize = 'cover';
     document.body.style.backgroundPosition = 'center';
     document.body.style.backgroundAttachment = 'fixed';
-
   };
-   
-    return (
-      <>
+
+  return (
+    <>
       <button className="fondo-btn">
-{/* 
-        <div className="lector">
-        <input type="text" className="input" placeholder="Link youtube video..." />
-        <button className="btn">Buscar</button>
-        </div> */}
-
-        <div className='modos'>
-          <ul>
-            <li>
-              <img className='modos_img' src={spaceimg}></img>
-              <p className='modos_img_text'>Space</p>
+        <div className="modos">
+        <ul>
+              <li >
+                <img className="modos_img" src={spaceimg} />
+                <p className="modos_img_text">Space</p>
               </li>
-            <li>
-              <img></img>
-              <p> </p>
-            </li>
-            <li>Chill</li>
-            <li>Chill</li>
-          </ul>
 
+              <li >
+                <img className="modos_img" src={selvaimg} />
+                <p className="modos_img_text">Selva</p>
+              </li>
+
+              <li >
+                <img className="modos_img" src={cityimg} />
+                <p className="modos_img_text">City</p>
+              </li>
+
+              <li >
+                <img className="modos_img" src={anime} />
+                <p className="modos_img_text">anime</p>
+              </li>
+              
+          </ul>
         </div>
-        
+
         <img
-        className="next"
-        onClick={cambiarFondo}
-        src={fondos[(currentFondoIndex + 1) % fondos.length]} // Muestra la siguiente imagen de fondo
-        alt="Cambiar fondo"
+          className="next"
+          onClick={cambiarFondo}
+          src={fondos[(currentFondoIndex + 1) % fondos.length]}
+          alt="Cambiar fondo"
         />
       </button>
-      </>
-    );
+    </>
+  );
 }
 
 export default FondoCambiante;

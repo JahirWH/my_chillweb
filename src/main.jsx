@@ -9,7 +9,6 @@ import FondoCambiante from './fondo.jsx';
 createRoot(document.getElementById('fondo')).render(
   <StrictMode>
     <FondoCambiante />
-
   </StrictMode>
 );
 createRoot(document.getElementById('root')).render(
@@ -18,10 +17,11 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>
 );
 
-// createRoot(document.getElementById('Info')).render(
-//   <StrictMode>
-//    <Info />
-//   </StrictMode>
-// );
+createRoot(document.getElementById('Info')).render(
+  <StrictMode>
+    <Info
+    />
+  </StrictMode>
+);
 
 

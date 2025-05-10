@@ -1,0 +1,10 @@
+[
+    {
+         "name": "Espacio", 
+        "data": "./assets/space.png" },
+    { 
+        "name": "Selva", 
+        "data": "./assets/selva.jpeg" 
+    }
+    
+  ]
