@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './fondo.css';
 import spaceimg from './assets/space.png';
+import old from './assets/old.png';
 import selvaimg from './assets/selva.jpeg';
 import cityimg from './assets/city.jpeg';
 import anime from './assets/anime.jpeg';
@@ -51,7 +52,12 @@ function FondoCambiante() {
                 <img className="modos_img" src={anime} />
                 <p className="modos_img_text">anime</p>
               </li>
-              
+
+               <li >
+                <img className="modos_img" src={old} />
+                <p className="modos_img_text">77s</p>
+              </li>
+
           </ul>
         </div>
 
