@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './fondo.css';
 import spaceimg from './assets/space.png';
-import old from './assets/old.png';
+import old from './assets/old.jpeg';
 import selvaimg from './assets/selva.jpeg';
 import cityimg from './assets/city.jpeg';
 import anime from './assets/anime.jpeg';
