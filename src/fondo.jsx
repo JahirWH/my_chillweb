@@ -7,6 +7,13 @@ import selvaimg from './assets/selva.jpeg';
 import cityimg from './assets/city.jpeg';
 import anime from './assets/anime.jpeg';
 
+function barra(){
+  const [currentTime, setCurrentTime] = useState('0:00');
+  const [duration, setDuration] = useState('0:00');
+
+  
+}
+
 
 const fondo1 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745538021/bg1_jzlxlw.webp';
 const fondo2 = 'https://res.cloudinary.com/dr9van0op/image/upload/v1745538552/bg2_cuslvq.webp';
