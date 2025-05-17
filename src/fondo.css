@@ -32,7 +32,7 @@ body {
 .fondo-btn:hover {
   opacity: 1;
   background-color: #323333a1;
-  height: 350px; /* Cambiamos de animación a transición */
+  height: 400px; /* Cambiamos de animación a transición */
   transition: all 0.5s cubic-bezier(0.33, 1, 0.68, 1);
 }
 

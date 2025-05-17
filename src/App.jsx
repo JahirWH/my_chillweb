@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import './App.css';
+import music from './assets/musica.json';
 
 
 const preview2 = 'https://media.giphy.com/media/UByFQJYlKxprETlJ84/giphy.gif?cid=ecf05e475x7ql9pxrfxz957k9wsz6g3z4t15velkoaijh7vj&ep=v1_gifs_related&rid=giphy.gif&ct=g';
 const preview1 = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzc1czJ3ZTV0YnlhMjRpYzI2NmxtYXNwdHBiMnA1b3p4MGxqN3VkMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/C3gZCY92Cwyxq/giphy.gif'
-const song1 = 'https://res.cloudinary.com/dr9van0op/video/upload/v1745559331/Galaxy_s_Most_Wanted_0sfwvi46i7I_rw0pjm.mp3';
-const song2 = 'https://res.cloudinary.com/dr9van0op/video/upload/v1745559326/Your_Signal_in_the_Stars_bQvfCzNpQ00_fqdnbr.mp3';
-const song3 = 'https://res.cloudinary.com/dr9van0op/video/upload/v1745559338/90s_Japanese_Lo-Fi___%E3%82%86%E3%81%A3%E3%81%8F%E3%82%8A%E3%81%A8%E6%B5%81%E3%82%8C%E3%82%8B%E5%A4%9C%E3%81%AE%E9%9F%B3_Slowly_flowing_night_sounds_Lofi_Hiphop_Mix_Z0_f6I_jJXQ_wnvjok.mp3';
+
 
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from 'react-icons/fa';
 
@@ -15,9 +14,8 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
-  // const [progress, setProgress] = useState(0);
-  // const [currentTime, setCurrentTime] = useState('0:00');
-  const [duration, setDuration] = useState('0:00');
+  const [progress, setProgress] = useState(0);
+
   const [currentSongIndex, setCurrentSongIndex] = useState(0); // Índice de la canción actual
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +25,10 @@ function App() {
   };
 
   const audioRef = useRef(null);
-  const songs = [song1, song2, song3]; 
+  const songs = music.map((song) => song.url);
+
+
+
 
   const togglePlay = () => {
     if (isPlaying) {
