@@ -25,34 +25,39 @@ function FondoCambiante() {
     document.body.style.backgroundSize = 'cover';
     document.body.style.backgroundPosition = 'center';
     document.body.style.backgroundAttachment = 'fixed';
-  };
+  }
+
+const cambiarFondoPersonalizado = (img) => {
+  document.body.style.backgroundImage = `url(${img})`;
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
+  document.body.style.backgroundAttachment = 'fixed';
+};
+
+
 
   return (
     <>
       <button className="fondo-btn">
         <div className="modos">
-        <ul>
-              <li >
-                <img className="modos_img" src={spaceimg} />
-                <p className="modos_img_text">Space</p>
-              </li>
-
-              <li >
-                <img className="modos_img" src={selvaimg} />
-                <p className="modos_img_text">Selva</p>
-              </li>
-
-              <li >
-                <img className="modos_img" src={cityimg} />
-                <p className="modos_img_text">City</p>
-              </li>
-
-              <li >
-                <img className="modos_img" src={anime} />
-                <p className="modos_img_text">anime</p>
-              </li>
-              
-          </ul>
+       <ul>
+  <li>
+    <img onClick={() => cambiarFondoPersonalizado(spaceimg)} className="modos_img" src={spaceimg} />
+    <p className="modos_img_text">Space</p>
+  </li>
+  <li>
+    <img onClick={() => cambiarFondoPersonalizado(selvaimg)} className="modos_img" src={selvaimg} />
+    <p className="modos_img_text">Selva</p>
+  </li>
+  <li>
+    <img onClick={() => cambiarFondoPersonalizado(cityimg)} className="modos_img" src={cityimg} />
+    <p className="modos_img_text">City</p>
+  </li>
+  <li>
+    <img onClick={() => cambiarFondoPersonalizado(anime)} className="modos_img" src={anime} />
+    <p className="modos_img_text">anime</p>
+  </li>
+</ul>
         </div>
 
         <img
