@@ -1,0 +1,115 @@
+/* City.css */
+
+.city-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #051937, #004d7a);
+  overflow: hidden;
+}
+
+.buildings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 60%;
+  background-image: 
+    repeating-linear-gradient(90deg, 
+      rgba(10, 20, 30, 0.8) 0px, 
+      rgba(10, 20, 30, 0.8) 40px, 
+      rgba(15, 25, 35, 0.8) 40px, 
+      rgba(15, 25, 35, 0.8) 80px),
+    repeating-linear-gradient(90deg, 
+      rgba(20, 30, 40, 0.5) 0px, 
+      rgba(20, 30, 40, 0.5) 30px, 
+      rgba(25, 35, 45, 0.5) 30px, 
+      rgba(25, 35, 45, 0.5) 60px);
+  animation: buildingMove 60s linear infinite;
+}
+
+.buildings::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to bottom, transparent 80%, rgba(0, 0, 0, 0.8)),
+    repeating-linear-gradient(to bottom, 
+      transparent 0px, 
+      transparent 5px, 
+      rgba(255, 255, 0, 0.05) 5px, 
+      rgba(255, 255, 0, 0.05) 10px);
+}
+
+.cars {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  width: 200%;
+  height: 2px;
+  background: rgba(255, 0, 0, 0.5);
+  box-shadow: 
+    0 0 10px rgba(255, 0, 0, 0.8),
+    0 0 20px rgba(255, 0, 0, 0.5);
+  animation: carsMove 8s linear infinite;
+}
+
+.cars::before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 200%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.5);
+  animation: carsMove 8s linear infinite reverse;
+}
+
+.lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 100, 0.1) 0%, transparent 5%),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 100, 0.1) 0%, transparent 5%),
+    radial-gradient(circle at 40% 20%, rgba(255, 255, 100, 0.1) 0%, transparent 5%),
+    radial-gradient(circle at 80% 40%, rgba(255, 255, 100, 0.1) 0%, transparent 5%);
+  animation: lightsFlicker 10s ease-in-out infinite;
+}
+
+@keyframes buildingMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes carsMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes lightsFlicker {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
