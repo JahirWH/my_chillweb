@@ -22,14 +22,20 @@
 .background-selector {
   position: absolute;
   bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 15px;
+  right: 3%;
+  display: block;
+  gap: 25px;
   z-index: 20;
+  height: fit-content;
+  overflow: hidden;
+}
+.background-selector:hover {
+  border-radius: 12px;
+  height: fit-content;
 }
 
 .bg-btn {
+  margin-top: 9px;
   background-color: rgba(0, 0, 0, 0.6);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
@@ -44,7 +50,6 @@
 
 .bg-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
-  transform: translateY(-5px);
 }
 
 .bg-btn.active {

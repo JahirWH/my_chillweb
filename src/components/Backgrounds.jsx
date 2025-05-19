@@ -31,6 +31,7 @@ function Backgrounds({ currentBackground, setCurrentBackground }) {
       </div>
       
       {/* Panel de selección de fondos */}
+      i
       <div className="background-selector">
         <button 
           className={`bg-btn ${currentBackground === 'jungle' ? 'active' : ''}`}
