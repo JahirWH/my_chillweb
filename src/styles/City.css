@@ -15,7 +15,7 @@
   bottom: 0;
   left: 0;
   width: 200%;
-  height: 60%;
+  height: 100%;
   background-image: 
     repeating-linear-gradient(90deg, 
       rgba(10, 20, 30, 0.8) 0px, 
@@ -28,6 +28,9 @@
       rgba(25, 35, 45, 0.5) 30px, 
       rgba(25, 35, 45, 0.5) 60px);
   animation: buildingMove 60s linear infinite;
+  background-image: url(/city.jpg);
+  background-size: contain;
+  overflow: hidden;
 }
 
 .buildings::before {

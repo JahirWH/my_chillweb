@@ -1,20 +1,57 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../styles/Chill.css';
 
 function Chill() {
+  const snowContainerRef = useRef(null);
+
   useEffect(() => {
-    // Inicializar animaciones del fondo chill
-    
+    const createSnowflake = () => {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      
+      // Tamaño aleatorio entre 2px y 5px
+      const size = Math.random() * 3 + 2;
+      snowflake.style.width = `${size}px`;
+      snowflake.style.height = `${size}px`;
+      
+      // Posición horizontal aleatoria
+      snowflake.style.left = `${Math.random() * 100}%`;
+      
+      // Duración de la animación aleatoria entre 5s y 10s
+      const duration = Math.random() * 5 + 5;
+      snowflake.style.animationDuration = `${duration}s`;
+      
+      // Retraso inicial aleatorio
+      snowflake.style.animationDelay = `${Math.random() * 5}s`;
+      
+      return snowflake;
+    };
+
+    const addSnowflakes = () => {
+      const container = snowContainerRef.current;
+      if (!container) return;
+
+      // Crear 50 copos de nieve
+      for (let i = 0; i < 50; i++) {
+        const snowflake = createSnowflake();
+        container.appendChild(snowflake);
+      }
+    };
+
+    addSnowflakes();
+
+    // Limpiar copos de nieve cuando el componente se desmonte
     return () => {
-      // Limpieza
+      if (snowContainerRef.current) {
+        snowContainerRef.current.innerHTML = '';
+      }
     };
   }, []);
 
   return (
     <div className="chill-background">
-      {/* Elementos animados para ambiente chill */}
+      <div className="snow" ref={snowContainerRef}></div>
       <div className="gradient"></div>
-      <div className="particles"></div>
       <div className="waves"></div>
     </div>
   );

@@ -4,9 +4,9 @@ import '../styles/Player.css';
 
 // Ejemplo de lista de canciones (reemplazar con tus propios datos)
 const songs = [
-  { title: "Canción 1", url: "URL_DE_TU_CANCION_1" },
-  { title: "Canción 2", url: "URL_DE_TU_CANCION_2" },
-  { title: "Canción 3", url: "URL_DE_TU_CANCION_3" }
+  { title: "Canción 1", url: "https://res.cloudinary.com/dr9van0op/video/upload/v1745559344/Y_O_K_O_H_A_M_A_1_9_8_0_-_Discover_80_s_Japanese_Funk__%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%95%E3%82%A1%E3%83%B3%E3%82%AF_Playlist_6_7iVx_NjtPj0_owd12f.mp3" },
+  { title: "Canción 2", url: "https://res.cloudinary.com/dr9van0op/video/upload/v1745559326/Your_Signal_in_the_Stars_bQvfCzNpQ00_fqdnbr.mp3" },
+  { title: "Canción 3", url: "https://res.cloudinary.com/dr9van0op/video/upload/v1745559344/Y_O_K_O_H_A_M_A_1_9_8_0_-_Discover_80_s_Japanese_Funk__%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%95%E3%82%A1%E3%83%B3%E3%82%AF_Playlist_6_7iVx_NjtPj0_owd12f.mp3" }
 ];
 
 function Player() {

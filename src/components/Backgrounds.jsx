@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/jungle.css';
+import Jungle from '../backgrounds/jungle';
 import City from '../backgrounds/City';
 import Chill from '../backgrounds/Chill';
 import '../styles/Backgrounds.css';

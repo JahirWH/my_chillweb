@@ -120,9 +120,10 @@
 .volume-slider {
   flex: 1;
   height: 3px;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
+  width: 2px;
 }
 
 .volume-slider::-webkit-slider-thumb {

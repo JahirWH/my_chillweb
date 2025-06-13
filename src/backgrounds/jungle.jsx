@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../styles/Jungle.css';
+import '../styles/jungle.css';
 
 function Jungle() {
   useEffect(() => {
