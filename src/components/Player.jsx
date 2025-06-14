@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from 'react-icons/fa';
 import '../styles/Player.css';
+import music from '../assets/musica.json';
 
-// Ejemplo de lista de canciones (reemplazar con tus propios datos)
-const songs = [
-  { title: "Canción 1", url: "https://res.cloudinary.com/dr9van0op/video/upload/v1745559344/Y_O_K_O_H_A_M_A_1_9_8_0_-_Discover_80_s_Japanese_Funk__%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%95%E3%82%A1%E3%83%B3%E3%82%AF_Playlist_6_7iVx_NjtPj0_owd12f.mp3" },
-  { title: "Canción 2", url: "https://res.cloudinary.com/dr9van0op/video/upload/v1745559326/Your_Signal_in_the_Stars_bQvfCzNpQ00_fqdnbr.mp3" },
-  { title: "Canción 3", url: "https://res.cloudinary.com/dr9van0op/video/upload/v1745559344/Y_O_K_O_H_A_M_A_1_9_8_0_-_Discover_80_s_Japanese_Funk__%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%95%E3%82%A1%E3%83%B3%E3%82%AF_Playlist_6_7iVx_NjtPj0_owd12f.mp3" }
-];
+// Lista de canciones desde el archivo JSON
+const songs = music.map(song => ({
+  title: song.title,
+  artist: song.artist,
+  url: song.url
+}));
 
 function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -20,7 +21,47 @@ function Player() {
   const [isLoading, setIsLoading] = useState(false);
   const [time, setTime] = useState('00:00');
   
-  const audioRef = useRef(null);
+  const audioRef = useRef(new Audio());
+
+  // Precargar la primera canción
+  useEffect(() => {
+    const audio = audioRef.current;
+    
+    const loadAudio = async () => {
+      try {
+        console.log('Loading audio:', songs[0].url);
+        audio.src = songs[0].url;
+        audio.volume = volume;
+        
+        await new Promise((resolve, reject) => {
+          audio.oncanplaythrough = resolve;
+          audio.onerror = (e) => {
+            console.error('Error loading audio:', e);
+            reject(e);
+          };
+          audio.load();
+        });
+        
+        console.log('Audio loaded successfully');
+      } catch (error) {
+        console.error('Failed to load audio:', error);
+      }
+    };
+
+    loadAudio();
+    
+    return () => {
+      audio.pause();
+      audio.src = '';
+    };
+  }, []);
+
+  // Actualizar el volumen cuando cambia
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : volume;
+    }
+  }, [volume, isMuted]);
 
   // Actualizar la hora actual
   useEffect(() => {
@@ -39,9 +80,35 @@ function Player() {
   
   // Manejar metadata de audio cuando carga
   useEffect(() => {
-    audioRef.current.addEventListener('loadedmetadata', () => {
-      setDuration(formatTime(audioRef.current.duration));
-    });
+    const audio = audioRef.current;
+    
+    const handleLoadedMetadata = () => {
+      console.log('Audio metadata loaded:', {
+        duration: audio.duration,
+        src: audio.src
+      });
+      setDuration(formatTime(audio.duration));
+    };
+
+    const handleError = (e) => {
+      console.error('Error loading audio:', e);
+      setIsLoading(false);
+    };
+
+    const handleCanPlay = () => {
+      console.log('Audio can play');
+      setIsLoading(false);
+    };
+
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('error', handleError);
+    audio.addEventListener('canplay', handleCanPlay);
+
+    return () => {
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('error', handleError);
+      audio.removeEventListener('canplay', handleCanPlay);
+    };
   }, []);
 
   // Formato de tiempo (segundos -> MM:SS)
@@ -52,13 +119,19 @@ function Player() {
   };
 
   // Controles de reproducción
-  const togglePlay = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
+  const togglePlay = async () => {
+    try {
+      if (isPlaying) {
+        await audioRef.current.pause();
+      } else {
+        setIsLoading(true);
+        await audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    } catch (error) {
+      console.error('Error toggling play:', error);
+      setIsLoading(false);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const playNext = async () => {
@@ -69,8 +142,17 @@ function Player() {
     setCurrentSongIndex(nextIndex);
     
     try {
-      audioRef.current.src = songs[nextIndex].url;
-      await audioRef.current.play();
+      const audio = audioRef.current;
+      audio.src = songs[nextIndex].url;
+      console.log('Loading next song:', songs[nextIndex].title);
+      
+      await new Promise((resolve, reject) => {
+        audio.oncanplaythrough = resolve;
+        audio.onerror = reject;
+        audio.load();
+      });
+      
+      await audio.play();
       setIsPlaying(true);
     } catch (error) {
       console.error("Error al reproducir:", error);
@@ -87,28 +169,22 @@ function Player() {
     setCurrentSongIndex(prevIndex);
     
     try {
-      audioRef.current.src = songs[prevIndex].url;
-      await audioRef.current.play();
+      const audio = audioRef.current;
+      audio.src = songs[prevIndex].url;
+      console.log('Loading previous song:', songs[prevIndex].title);
+      
+      await new Promise((resolve, reject) => {
+        audio.oncanplaythrough = resolve;
+        audio.onerror = reject;
+        audio.load();
+      });
+      
+      await audio.play();
       setIsPlaying(true);
     } catch (error) {
       console.error("Error al reproducir:", error);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  // Control de volumen
-  const toggleMute = () => {
-    audioRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
-
-  const handleVolumeChange = (e) => {
-    const newVolume = e.target.value;
-    setVolume(newVolume);
-    audioRef.current.volume = newVolume;
-    if (newVolume > 0 && isMuted) {
-      setIsMuted(false);
     }
   };
 
@@ -127,10 +203,29 @@ function Player() {
     audioRef.current.currentTime = pos * audioRef.current.duration;
   };
 
+  // Control de volumen
+  const toggleMute = () => {
+    audioRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value;
+    setVolume(newVolume);
+    audioRef.current.volume = newVolume;
+    if (newVolume > 0 && isMuted) {
+      setIsMuted(false);
+    }
+  };
+
   return (
     <div className="player">
       <div className="player-display">
         <div className="time-display">{time}</div>
+        <div className="song-info">
+          <div className="song-title">{songs[currentSongIndex].title}</div>
+          <div className="song-artist">{songs[currentSongIndex].artist}</div>
+        </div>
         <div className="status-display">
           {isLoading ? (
             <span className="loading">Cargando...</span>
