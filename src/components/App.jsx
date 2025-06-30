@@ -24,9 +24,13 @@ function App() {
   const [horaActual, setHoraActual] = useState('');
   const [progress, setProgress] = useState(0);
   const [showSettings, setShowSettings] = useState(false);
+  const [customTracks, setCustomTracks] = useState([]); // tracks agregados por el usuario
+  const [newTrackUrl, setNewTrackUrl] = useState('');
+  const [animationsEnabled, setAnimationsEnabled] = useState(true);
 
   const audioRef = useRef(null);
-  const songs = music.map((song) => song.url);
+  const baseSongs = music.map((song) => song.url);
+  const songs = [...baseSongs, ...customTracks];
 
   // Actualizar la hora
   useEffect(() => {
@@ -128,11 +132,25 @@ function App() {
     }
   };
 
+  // Agregar track online
+  const handleAddTrack = () => {
+    if (newTrackUrl.trim() && !songs.includes(newTrackUrl.trim())) {
+      setCustomTracks([...customTracks, newTrackUrl.trim()]);
+      setNewTrackUrl('');
+    }
+  };
+
+  // Eliminar track agregado
+  const handleRemoveTrack = (url) => {
+    setCustomTracks(customTracks.filter(track => track !== url));
+  };
+
   return (
     <section className='section-chill-app'>
       <Backgrounds 
         currentBackground={currentBackground}
         setCurrentBackground={setCurrentBackground}
+        animationsEnabled={animationsEnabled}
       />
       
       <div className="chill-app">
@@ -185,9 +203,41 @@ function App() {
           />
         </div>
         <div className='settings'>
-          <button onClick={() => setShowSettings(!showSettings)} >settings</button>
+          <button onClick={() => setShowSettings(!showSettings)} >Settings</button>
           <div className='settings_show' style={{ display: showSettings ? 'block' : 'none' }}>
-            <input type="text" placeholder='add your url track(no youtube)' />
+            <div style={{marginBottom: '10px'}}>
+              <input 
+                type="text" 
+                placeholder='Add your track URL (no YouTube)'
+                value={newTrackUrl}
+                onChange={e => setNewTrackUrl(e.target.value)}
+                style={{width: '70%'}}
+              />
+              <button onClick={handleAddTrack}>Add</button>
+            </div>
+            <div>
+              <label>
+                <input 
+                  type="checkbox" 
+                  checked={animationsEnabled}
+                  onChange={() => setAnimationsEnabled(!animationsEnabled)}
+                />
+                Animaciones activas
+              </label>
+            </div>
+            {customTracks.length > 0 && (
+              <div style={{marginTop: '10px'}}>
+                <strong>Tracks agregados:</strong>
+                <ul>
+                  {customTracks.map((track, idx) => (
+                    <li key={track}>
+                      {track}
+                      <button style={{marginLeft: '10px'}} onClick={() => handleRemoveTrack(track)}>Quitar</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
