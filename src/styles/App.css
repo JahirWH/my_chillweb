@@ -117,7 +117,7 @@
 .volume-control {
   position: absolute;
   display: flex;
-  right: 5%;
+  right: 10%;
   align-items: center;
   gap: 10px;
   margin-top: 15px;
@@ -163,6 +163,40 @@
   background: rgba(233, 233, 233, 0.753);
   border-radius: 50%;
   cursor: pointer;
+}
+.settings{
+  width: 150px;
+  height: fit-content;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 20;
+  transition: all 1s ease;
+}
+.settings_show {
+  width: 100%;
+  height: fit-content;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  transition: all 1s ease;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+.settings_show_active {
+  display: flex;
+  transition: all 1s ease;
 }
 
 .audio-wave {

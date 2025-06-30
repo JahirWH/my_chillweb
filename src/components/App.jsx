@@ -7,6 +7,13 @@ import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackwar
 const preview2 = 'https://media.giphy.com/media/UByFQJYlKxprETlJ84/giphy.gif?cid=ecf05e475x7ql9pxrfxz957k9wsz6g3z4t15velkoaijh7vj&ep=v1_gifs_related&rid=giphy.gif&ct=g';
 const preview1 = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzc1czJ3ZTV0YnlhMjRpYzI2NmxtYXNwdHBiMnA1b3p4MGxqN3VkMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/C3gZCY92Cwyxq/giphy.gif'
 
+// animaciones
+function show_divs(id){
+  
+
+}
+
+
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
@@ -16,6 +23,7 @@ function App() {
   const [currentBackground, setCurrentBackground] = useState('chill');
   const [horaActual, setHoraActual] = useState('');
   const [progress, setProgress] = useState(0);
+  const [showSettings, setShowSettings] = useState(false);
 
   const audioRef = useRef(null);
   const songs = music.map((song) => song.url);
@@ -46,6 +54,11 @@ function App() {
     audioRef.current.muted = !isMuted;
     setIsMuted(!isMuted);
   };
+
+  // const configuration = () => (
+  //   setting.current.show = 
+  // )
+
 
   const handleVolumeChange = (e) => {
     const newVolume = e.target.value;
@@ -170,6 +183,12 @@ function App() {
             value={isMuted ? 0 : volume}
             onChange={handleVolumeChange}
           />
+        </div>
+        <div className='settings'>
+          <button onClick={() => setShowSettings(!showSettings)} >settings</button>
+          <div className='settings_show' style={{ display: showSettings ? 'block' : 'none' }}>
+            <input type="text" placeholder='add your url track(no youtube)' />
+          </div>
         </div>
       </div>
     </section>

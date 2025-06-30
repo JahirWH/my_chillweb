@@ -8,6 +8,7 @@ import '../styles/Backgrounds.css';
 import jungleIcon from '../assets/selva.jpeg';
 import cityIcon from '../assets/city.jpeg';
 import chillIcon from '../assets/space.png';
+// import personal from '../assets/personal.png';
 
 function Backgrounds({ currentBackground, setCurrentBackground }) {
   // Renderizar el fondo activo según la selección
@@ -32,6 +33,14 @@ function Backgrounds({ currentBackground, setCurrentBackground }) {
       
       {/* Panel de selección de fondos */}
       <div className="background-selector">
+        <button 
+          className={`bg-btn ${currentBackground === 'chill' ? 'active' : ''}`}
+          onClick={() => setCurrentBackground('chill')}
+        >
+          <img src={chillIcon} alt="Darknes" />
+          <span>Darknes</span>
+        </button>
+
         <button 
           className={`bg-btn ${currentBackground === 'jungle' ? 'active' : ''}`}
           onClick={() => setCurrentBackground('jungle')}

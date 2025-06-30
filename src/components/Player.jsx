@@ -282,6 +282,8 @@ function Player() {
             onChange={handleVolumeChange}
           />
         </div>
+
+        
       </div>
     </div>
   );
