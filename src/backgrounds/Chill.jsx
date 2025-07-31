@@ -52,7 +52,7 @@ function Chill() {
     <div className="chill-background">
       <div className="snow" ref={snowContainerRef}></div>
       <div className="gradient"></div>
-      <div className="waves"></div>
+      {/* <div className="waves"></div> */}
     </div>
   );
 }

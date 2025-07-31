@@ -132,6 +132,24 @@ function App() {
     }
   };
 
+
+const activarPantallaCompleta = () => {
+  const elem = document.documentElement;
+
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+  else if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    elem.msRequestFullscreen();
+  }
+};
+
   // Agregar track online
   const handleAddTrack = () => {
     if (newTrackUrl.trim() && !songs.includes(newTrackUrl.trim())) {
@@ -187,6 +205,9 @@ function App() {
             </div>
           </div>
         </section>
+       
+
+       
         
         <div className='volume-control'>
           <button id="volume-icon" onClick={toggleMute}>
@@ -202,6 +223,11 @@ function App() {
             onChange={handleVolumeChange}
           />
         </div>
+
+       <button className='fullscreen-btn' onClick={activarPantallaCompleta}>
+          Pantalla Completa
+        </button>
+
         <div className='settings'>
           <button onClick={() => setShowSettings(!showSettings)} >Settings</button>
           <div className='settings_show' style={{ display: showSettings ? 'block' : 'none' }}>

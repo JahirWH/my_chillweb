@@ -36,6 +36,11 @@ function Backgrounds({ currentBackground, setCurrentBackground, animationsEnable
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [open]);
 
+
+
+
+
+
   // Renderizar el fondo activo según la selección
   const renderActiveBackground = () => {
     switch(currentBackground) {
