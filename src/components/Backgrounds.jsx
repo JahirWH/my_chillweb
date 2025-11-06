@@ -8,6 +8,7 @@ import '../styles/Backgrounds.css';
 import jungleIcon from '../assets/selva.jpeg';
 import cityIcon from '../assets/city.jpeg'; 
 import chillIcon from '../assets/space.png';
+import fullico from '/fullico.png'
 // import personal from '../assets/personal.png';
 
 const backgrounds = [
@@ -17,7 +18,7 @@ const backgrounds = [
   { key: 'chill', label: 'Chill', icon: chillIcon },
 ];
 
-function Backgrounds({ currentBackground, setCurrentBackground, animationsEnabled }) {
+function Backgrounds({ currentBackground, setCurrentBackground, animationsEnabled, onFullscreen }) {
   const [open, setOpen] = useState(false);
   const selectorRef = useRef(null);
 
@@ -94,10 +95,15 @@ function Backgrounds({ currentBackground, setCurrentBackground, animationsEnable
               </button>
             ))}
           </div>
+
         )}
       </div>
+      
+      <button className='fullscreen-btn' onClick={onFullscreen}>
+        <img src={fullico} alt="Fullscreen" />
+      </button>
     </div>
-  );
+);
 }
 
 export default Backgrounds;

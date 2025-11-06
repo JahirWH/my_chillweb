@@ -169,7 +169,9 @@ const activarPantallaCompleta = () => {
         currentBackground={currentBackground}
         setCurrentBackground={setCurrentBackground}
         animationsEnabled={animationsEnabled}
+        onFullscreen={activarPantallaCompleta}
       />
+      
       
       <div className="chill-app">
         <div className='img-preview'>
@@ -207,8 +209,11 @@ const activarPantallaCompleta = () => {
         </section>
        
 
+      
+
        
         
+      
         <div className='volume-control'>
           <button id="volume-icon" onClick={toggleMute}>
             {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
@@ -224,9 +229,7 @@ const activarPantallaCompleta = () => {
           />
         </div>
 
-       <button className='fullscreen-btn' onClick={activarPantallaCompleta}>
-          Pantalla Completa
-        </button>
+       
 
         <div className='settings'>
           <button onClick={() => setShowSettings(!showSettings)} >Settings</button>
@@ -266,6 +269,8 @@ const activarPantallaCompleta = () => {
             )}
           </div>
         </div>
+
+
       </div>
     </section>
   );
