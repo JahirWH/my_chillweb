@@ -220,15 +220,43 @@
     transform: scaleX(0.5);
   }
 }
+/* responsive styles table */
 
+@media (max-width: 780px) {
+
+  .chill-app {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .img-preview {
+    width: 80%;
+    height: auto;
+  }
+
+  .media-player {
+    width: 80%;
+  }
+}
 /* Responsive styles */
 @media (max-width: 480px) {
   .chill-app {
-    padding: 15px;
+    display: block;
+    margin: auto;
+
   }
 
   .img-preview {
     height: 150px;
+    margin: auto;
+  }
+  .media-player{
+    opacity: 0.5;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #000000d1;
+    padding: 10px;
+    border-radius: 15px;
   }
 
   .time {
