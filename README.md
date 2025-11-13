@@ -3,7 +3,8 @@
 ChillWeb es una aplicación web sencilla construida con React y Vite. Proporciona un fondo relajante con música lofi para ayudarte a concentrarte o relajarte.
 
 ## Captura
-![Preview](./src/assets/pre.webp)
+<!-- ![Preview](./src/assets/pre.webp) -->
+![Preview](banner.webp)
 
 
 ## Características

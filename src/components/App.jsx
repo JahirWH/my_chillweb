@@ -4,14 +4,7 @@ import music from '../assets/musica.json';
 import Backgrounds from './Backgrounds';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from 'react-icons/fa';
 
-const preview2 = 'https://media.giphy.com/media/UByFQJYlKxprETlJ84/giphy.gif?cid=ecf05e475x7ql9pxrfxz957k9wsz6g3z4t15velkoaijh7vj&ep=v1_gifs_related&rid=giphy.gif&ct=g';
-const preview1 = 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzc1czJ3ZTV0YnlhMjRpYzI2NmxtYXNwdHBiMnA1b3p4MGxqN3VkMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/C3gZCY92Cwyxq/giphy.gif'
-
-// animaciones
-function show_divs(id){
-  
-
-}
+// animaciones (placeholders removed - not used)
 
 
 function App() {
@@ -22,7 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentBackground, setCurrentBackground] = useState('chill');
   const [horaActual, setHoraActual] = useState('');
-  const [progress, setProgress] = useState(0);
+  
   const [showSettings, setShowSettings] = useState(false);
   const [customTracks, setCustomTracks] = useState([]); // tracks agregados por el usuario
   const [newTrackUrl, setNewTrackUrl] = useState('');
@@ -74,16 +67,15 @@ function App() {
   };
 
   const handleTimeUpdate = () => {
-    const current = audioRef.current.currentTime;
-    const dur = audioRef.current.duration;
-    setProgress((current / dur) * 100);
+    // placeholder: kept for audio onTimeUpdate event. Player component manages visual progress.
   };
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  // Detectar si una URL es de YouTube
+  const isYouTubeUrl = (url) => {
+    return /(?:youtube\.com\/watch\?v=|youtu\.be\/)/i.test(url);
   };
+
+  // (formatTime removed from here because Player component defines and uses its own formatter)
 
   const playNext = async () => {
     setIsLoading(true);
@@ -233,11 +225,11 @@ const activarPantallaCompleta = () => {
 
         <div className='settings'>
           <button onClick={() => setShowSettings(!showSettings)} >Settings</button>
-          <div className='settings_show' style={{ display: showSettings ? 'block' : 'none' }}>
+          <div className={`settings_show ${showSettings ? 'settings_show_active' : ''}`}>
             <div style={{marginBottom: '10px'}}>
               <input 
                 type="text" 
-                placeholder='Add your track URL (no YouTube)'
+                placeholder='Add your YouTube or direct audio URL'
                 value={newTrackUrl}
                 onChange={e => setNewTrackUrl(e.target.value)}
                 style={{width: '70%'}}
@@ -259,9 +251,16 @@ const activarPantallaCompleta = () => {
                 <strong>Tracks agregados:</strong>
                 <ul>
                   {customTracks.map((track, idx) => (
-                    <li key={track}>
+                    <li key={idx}>
                       {track}
-                      <button style={{marginLeft: '10px'}} onClick={() => handleRemoveTrack(track)}>Quitar</button>
+                      {isYouTubeUrl(track) ? (
+                        <>
+                          <button style={{marginLeft: '10px'}} onClick={() => window.open(track, '_blank', 'noopener')}>Abrir</button>
+                          <small style={{marginLeft: '8px', color: 'rgba(255,255,255,0.7)'}}>YouTube</small>
+                        </>
+                      ) : (
+                        <button style={{marginLeft: '10px'}} onClick={() => handleRemoveTrack(track)}>Quitar</button>
+                      )}
                     </li>
                   ))}
                 </ul>
