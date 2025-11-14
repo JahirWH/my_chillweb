@@ -143,11 +143,30 @@ const activarPantallaCompleta = () => {
 };
 
   // Agregar track online
+  const [trackError, setTrackError] = useState('');
+
+  const isValidUrl = (url) => {
+    // Basic validation for http(s) URLs and YouTube links
+    return /^(https?:\/\/[^\s]+)$/.test(url) || isYouTubeUrl(url);
+  };
+
   const handleAddTrack = () => {
-    if (newTrackUrl.trim() && !songs.includes(newTrackUrl.trim())) {
-      setCustomTracks([...customTracks, newTrackUrl.trim()]);
-      setNewTrackUrl('');
+    const trimmedUrl = newTrackUrl.trim();
+    if (!trimmedUrl) {
+      setTrackError('URL cannot be empty.');
+      return;
     }
+    if (!isValidUrl(trimmedUrl)) {
+      setTrackError('Please enter a valid URL (http(s) or YouTube).');
+      return;
+    }
+    if (songs.includes(trimmedUrl)) {
+      setTrackError('This track is already added.');
+      return;
+    }
+    setCustomTracks([...customTracks, trimmedUrl]);
+    setNewTrackUrl('');
+    setTrackError('');
   };
 
   // Eliminar track agregado
@@ -163,6 +182,21 @@ const activarPantallaCompleta = () => {
         animationsEnabled={animationsEnabled}
         onFullscreen={activarPantallaCompleta}
       />
+      
+       <div className='volume-control'>
+          <button id="volume-icon" onClick={toggleMute}>
+            {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
+          </button>
+          <input
+            className='volume-slider'
+            type='range'
+            min='0'
+            max='1'
+            step='0.01'
+            value={isMuted ? 0 : volume}
+            onChange={handleVolumeChange}
+          />
+        </div>
       
       
       <div className="chill-app">
@@ -206,20 +240,7 @@ const activarPantallaCompleta = () => {
        
         
       
-        <div className='volume-control'>
-          <button id="volume-icon" onClick={toggleMute}>
-            {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
-          </button>
-          <input
-            className='volume-slider'
-            type='range'
-            min='0'
-            max='1'
-            step='0.01'
-            value={isMuted ? 0 : volume}
-            onChange={handleVolumeChange}
-          />
-        </div>
+       
 
        
 
@@ -235,6 +256,11 @@ const activarPantallaCompleta = () => {
                 style={{width: '70%'}}
               />
               <button onClick={handleAddTrack}>Add</button>
+              {trackError && (
+                <div style={{ color: 'red', marginTop: '5px', fontSize: '0.95em' }}>
+                  {trackError}
+                </div>
+              )}
             </div>
             <div>
               <label>
