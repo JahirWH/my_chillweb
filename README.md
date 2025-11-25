@@ -20,3 +20,6 @@ ChillWeb es una aplicación web sencilla construida con React y Vite. Proporcion
 3. Inicia el servidor de desarrollo con `npm run dev`.
 
 ¡Disfruta de un entorno pacífico y productivo con ChillWeb!
+
+## Mejoras
+1. Animacion de fondo 
