@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import '../styles/App.css';
 import music from '../assets/musica.json';
 import Backgrounds from './Backgrounds';
+import Notification from './Notification';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackward } from 'react-icons/fa';
 
 // animaciones (placeholders removed - not used)
@@ -20,6 +21,8 @@ function App() {
   const [customTracks, setCustomTracks] = useState([]); // tracks agregados por el usuario
   const [newTrackUrl, setNewTrackUrl] = useState('');
   const [animationsEnabled, setAnimationsEnabled] = useState(true);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationData, setNotificationData] = useState({ title: '', artist: '' });
 
   const audioRef = useRef(null);
   const baseSongs = music.map((song) => song.url);
@@ -94,6 +97,14 @@ function App() {
       
       await audioRef.current.play();
       setIsPlaying(true);
+      
+      // Mostrar notificación
+      const currentSong = music[nextIndex] || { title: 'Canción sin título', artist: 'Artista desconocido' };
+      setNotificationData({
+        title: currentSong.title || 'Canción sin título',
+        artist: currentSong.artist || 'Artista desconocido'
+      });
+      setShowNotification(true);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -117,6 +128,14 @@ function App() {
       
       await audioRef.current.play();
       setIsPlaying(true);
+      
+      // Mostrar notificación
+      const currentSong = music[prevIndex] || { title: 'Canción sin título', artist: 'Artista desconocido' };
+      setNotificationData({
+        title: currentSong.title || 'Canción sin título',
+        artist: currentSong.artist || 'Artista desconocido'
+      });
+      setShowNotification(true);
     } catch (error) {
       console.error("Error al cargar la canción:", error);
     } finally {
@@ -176,6 +195,11 @@ const activarPantallaCompleta = () => {
 
   return (
     <section className='section-chill-app'>
+      <Notification 
+        show={showNotification}
+        songTitle={notificationData.title}
+        songArtist={notificationData.artist}
+      />
       <Backgrounds 
         currentBackground={currentBackground}
         setCurrentBackground={setCurrentBackground}
