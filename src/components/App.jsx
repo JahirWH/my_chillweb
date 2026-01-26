@@ -9,6 +9,7 @@ import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute, FaStepForward, FaStepBackwar
 
 
 function App() {
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
@@ -41,6 +42,7 @@ function App() {
     return () => clearInterval(intervalo);
   }, []);
 
+
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -49,6 +51,7 @@ function App() {
     }
     setIsPlaying(!isPlaying);
   };
+
 
   const toggleMute = () => {
     audioRef.current.muted = !isMuted;
@@ -78,12 +81,14 @@ function App() {
     return /(?:youtube\.com\/watch\?v=|youtu\.be\/)/i.test(url);
   };
 
+
   // (formatTime removed from here because Player component defines and uses its own formatter)
 
   const playNext = async () => {
     setIsLoading(true);
     setIsPlaying(false);
     
+
     const nextIndex = (currentSongIndex + 1) % songs.length;
     setCurrentSongIndex(nextIndex);
     
@@ -260,64 +265,6 @@ const activarPantallaCompleta = () => {
        
 
       
-
-       
-        
-      
-       
-
-       
-
-        <div className='settings'>
-          <button onClick={() => setShowSettings(!showSettings)} >Settings</button>
-          <div className={`settings_show ${showSettings ? 'settings_show_active' : ''}`}>
-            <div style={{marginBottom: '10px'}}>
-              <input 
-                type="text" 
-                placeholder='Add your YouTube or direct audio URL'
-                value={newTrackUrl}
-                onChange={e => setNewTrackUrl(e.target.value)}
-                style={{width: '70%'}}
-              />
-              <button onClick={handleAddTrack}>Add</button>
-              {trackError && (
-                <div style={{ color: 'red', marginTop: '5px', fontSize: '0.95em' }}>
-                  {trackError}
-                </div>
-              )}
-            </div>
-            <div>
-              <label>
-                <input 
-                  type="checkbox" 
-                  checked={animationsEnabled}
-                  onChange={() => setAnimationsEnabled(!animationsEnabled)}
-                />
-                Animaciones activas
-              </label>
-            </div>
-            {customTracks.length > 0 && (
-              <div style={{marginTop: '10px'}}>
-                <strong>Tracks agregados:</strong>
-                <ul>
-                  {customTracks.map((track, idx) => (
-                    <li key={idx}>
-                      {track}
-                      {isYouTubeUrl(track) ? (
-                        <>
-                          <button style={{marginLeft: '10px'}} onClick={() => window.open(track, '_blank', 'noopener')}>Abrir</button>
-                          <small style={{marginLeft: '8px', color: 'rgba(255,255,255,0.7)'}}>YouTube</small>
-                        </>
-                      ) : (
-                        <button style={{marginLeft: '10px'}} onClick={() => handleRemoveTrack(track)}>Quitar</button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
 
 
       </div>
