@@ -212,23 +212,11 @@ const activarPantallaCompleta = () => {
         onFullscreen={activarPantallaCompleta}
       />
       
-       <div className='volume-control'>
-          <button id="volume-icon" onClick={toggleMute}>
-            {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
-          </button>
-          <input
-            className='volume-slider'
-            type='range'
-            min='0'
-            max='1'
-            step='0.01'
-            value={isMuted ? 0 : volume}
-            onChange={handleVolumeChange}
-          />
-        </div>
+      
       
       
       <div className="chill-app">
+
         <div className='img-preview'>
           <p className='time'>{horaActual}</p>
           <p className='estado'>
@@ -262,6 +250,29 @@ const activarPantallaCompleta = () => {
             </div>
           </div>
         </section>
+
+        <div className='input-search' >
+            <div>
+              <input placeholder='url here..' className='input-search-int'></input>
+            </div>
+        </div>
+
+
+         <div className='volume-control'>
+          <button id="volume-icon" onClick={toggleMute}>
+            {isMuted || volume === 0 ? <FaVolumeMute /> : <FaVolumeUp />}
+          </button>
+          <input
+            className='volume-slider'
+            type='range'
+            min='0'
+
+            max='1'
+            step='0.01'
+            value={isMuted ? 0 : volume}
+            onChange={handleVolumeChange}
+          />
+        </div>
        
 
       
